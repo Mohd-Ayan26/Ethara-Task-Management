@@ -1,0 +1,39 @@
+services:
+  # ── Backend (Node/Express) ─────────────────────────────────────────────────
+  - type: web
+    name: ethara-ai-server
+    runtime: node
+    rootDir: server
+    buildCommand: npm install
+    startCommand: node index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGODB_URI
+        sync: false          # set manually in Render dashboard
+      - key: JWT_SECRET
+        generateValue: true  # Render auto-generates a secure random value
+      - key: JWT_EXPIRE
+        value: 7d
+      - key: CLIENT_URL
+        sync: false          # set after frontend deploys
+    healthCheckPath: /api/health
+    autoDeploy: true
+
+  # ── Frontend (React static site) ──────────────────────────────────────────
+  - type: web
+    name: ethara-ai-client
+    runtime: static
+    rootDir: client
+    buildCommand: npm install && npm run build
+    staticPublishPath: build
+    envVars:
+      - key: REACT_APP_API_URL
+        sync: false          # set to your backend URL before deploying
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    autoDeploy: true
