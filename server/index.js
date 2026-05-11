@@ -60,6 +60,10 @@ app.use('/api/tasks', taskRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/analytics', analyticsRoutes);
 
+app.get('/', (req, res) => {
+  res.send('ETHARA AI Backend Running Successfully');
+});
+
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ONLINE', timestamp: new Date().toISOString(), system: 'ETHARA-AI-v1.0' });
