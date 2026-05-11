@@ -39,25 +39,76 @@ function ProjectSelector({ projects, value, onChange, onMembersChange }) {
     const proj = projects.find(p => p._id === pid);
     onMembersChange(proj?.members || []);
   };
-  return (
-    <div>
-      <label style={{ fontFamily: 'var(--font-display)', fontSize: '10px', color: 'var(--neon-cyan)', letterSpacing: '2px', display: 'block', marginBottom: 8 }}>
-        PROJECT *
-      </label>
-      <div style={{ position: 'relative' }}>
-        <ChevronDown size={12} style={{ position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)', pointerEvents: 'none' }} />
-        <select
-          className="cyber-input"
-          style={{ appearance: 'none', paddingRight: 32, cursor: 'pointer' }}
-          value={value}
-          onChange={handleChange}
+ return (
+  <div>
+    <label
+      style={{
+        fontFamily: 'var(--font-display)',
+        fontSize: '10px',
+        color: 'var(--neon-cyan)',
+        letterSpacing: '2px',
+        display: 'block',
+        marginBottom: 8
+      }}
+    >
+      PROJECT *
+    </label>
+
+    <div style={{ position: 'relative' }}>
+      <ChevronDown
+        size={12}
+        style={{
+          position: 'absolute',
+          right: 12,
+          top: '50%',
+          transform: 'translateY(-50%)',
+          color: 'var(--text-muted)',
+          pointerEvents: 'none',
+          zIndex: 2
+        }}
+      />
+
+      <select
+        className="cyber-input"
+        style={{
+          appearance: 'none',
+          WebkitAppearance: 'none',
+          MozAppearance: 'none',
+          paddingRight: 32,
+          cursor: 'pointer',
+          background: '#071426',
+          color: '#d9faff',
+          border: '1px solid var(--neon-cyan)'
+        }}
+        value={value}
+        onChange={handleChange}
+      >
+        <option
+          value=""
+          style={{
+            background: '#071426',
+            color: '#d9faff'
+          }}
         >
-          <option value="">Select project…</option>
-          {projects.map(p => <option key={p._id} value={p._id}>{p.name}</option>)}
-        </select>
-      </div>
+          Select project…
+        </option>
+
+        {projects.map((p) => (
+          <option
+            key={p._id}
+            value={p._id}
+            style={{
+              background: '#071426',
+              color: '#d9faff'
+            }}
+          >
+            {p.name}
+          </option>
+        ))}
+      </select>
     </div>
-  );
+  </div>
+);
 }
 
 // ── Member status indicator for list rows ─────────────────────────────────────
