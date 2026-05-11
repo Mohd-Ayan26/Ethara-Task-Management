@@ -231,17 +231,30 @@ export default function ProjectsPage() {
             {projects.length} active operations
           </p>
         </div>
-        <button onClick={() => setShowModal(true)} style={{
-          display: 'flex', alignItems: 'center', gap: 8,
-          background: 'var(--neon-cyan)', border: 'none',
-          borderRadius: 'var(--radius-sm)', padding: '12px 20px',
-          fontFamily: 'var(--font-display)', fontSize: '11px', fontWeight: 700,
-          letterSpacing: '2px', color: 'var(--bg-void)', cursor: 'pointer',
-          boxShadow: '0 0 20px rgba(0,245,255,0.3)'
-        }}>
-          <Plus size={14} />
-          NEW PROJECT
-        </button>
+        {user?.role === 'admin' && (
+  <button
+    onClick={() => setShowModal(true)}
+    style={{
+      display: 'flex',
+      alignItems: 'center',
+      gap: 8,
+      background: 'var(--neon-cyan)',
+      border: 'none',
+      borderRadius: 'var(--radius-sm)',
+      padding: '12px 20px',
+      fontFamily: 'var(--font-display)',
+      fontSize: '11px',
+      fontWeight: 700,
+      letterSpacing: '2px',
+      color: 'var(--bg-void)',
+      cursor: 'pointer',
+      boxShadow: '0 0 20px rgba(0,245,255,0.3)'
+    }}
+  >
+    <Plus size={14} />
+    NEW PROJECT
+  </button>
+)}
       </div>
 
       {/* Search */}
